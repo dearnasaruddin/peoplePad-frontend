@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { GoEye, GoEyeClosed } from "react-icons/go";
+import { Link } from "react-router-dom";
 
 const RegistrationPage = () => {
 
@@ -41,6 +42,7 @@ const RegistrationPage = () => {
                 </div>
 
                 <button onClick={handleSubmit} className="btn btn-neutral mt-4 rounded-md">Create account</button>
+                <p className="text-center mt-2">Already have an account? <Link className="text-blue-400 ml-2" to={'/login'}>Login</Link> </p>
             </fieldset>
         </div>
     )
