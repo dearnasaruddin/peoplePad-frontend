@@ -1,8 +1,15 @@
 import { useState } from "react";
 import { GoEye, GoEyeClosed } from "react-icons/go";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { registration } from "../features/auth/authSlice";
+
 
 const RegistrationPage = () => {
+
+    const dispatch = useDispatch()
+    const { message, error, loading
+    } = useSelector((state) => state.auth)
 
     const [formData, setFormData] = useState({
         username: '',
@@ -11,7 +18,8 @@ const RegistrationPage = () => {
     })
     const [showPassword, setShowPassword] = useState(false);
 
-    const handleSubmit = async () => {        
+    const handleSubmit = async () => {
+        dispatch(registration(formData))
         setFormData({
             username: '',
             email: '',
@@ -40,8 +48,12 @@ const RegistrationPage = () => {
                             <span onClick={() => setShowPassword(true)} className="absolute top-1/2 -translate-y-1/2 text-lg text-gray-300 right-3 cursor-pointer"><GoEyeClosed /></span>)
                     }
                 </div>
-
-                <button onClick={handleSubmit} className="btn btn-neutral mt-4 rounded-md">Create account</button>
+                {
+                    loading ?
+                        <button className="btn btn-neutral mt-4 rounded-md">Loading ...</button>
+                        :
+                        <button onClick={handleSubmit} className="btn btn-neutral mt-4 rounded-md">Create account</button>
+                }
                 <p className="text-center mt-2">Already have an account? <Link className="text-blue-400 ml-2" to={'/login'}>Login</Link> </p>
             </fieldset>
         </div>

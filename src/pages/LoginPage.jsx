@@ -1,9 +1,15 @@
 import { useState } from "react";
-import {Link} from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { GoEye, GoEyeClosed } from "react-icons/go";
+import { login } from "../features/auth/authSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 
 const LoginPage = () => {
+
+  const dispatch = useDispatch()
+  const { message, error, loading
+  } = useSelector((state) => state.auth)
 
   const [formData, setFormData] = useState({
     email: '',
@@ -12,6 +18,7 @@ const LoginPage = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async () => {
+    dispatch(login(formData))
     setFormData({
       email: '',
       password: '',
@@ -38,7 +45,12 @@ const LoginPage = () => {
           }
         </div>
         <Link className="text-blue-400 ml-2" to={'/forgot-password'}>Forgot password?</Link>
-        <button onClick={handleSubmit} className="btn btn-neutral mt-1 rounded-md">Log in</button>
+        {
+          loading ?
+            <button className="btn btn-neutral mt-4 rounded-md">Loading ...</button>
+            :
+            <button onClick={handleSubmit} className="btn btn-neutral mt-4 rounded-md">Login</button>
+        }
         <p className="text-center mt-2">Haven't any account?<Link className="text-blue-400 ml-2" to={'/registration'}>Create Account</Link> </p>
       </fieldset>
     </div>
