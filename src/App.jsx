@@ -4,13 +4,14 @@ import LoginPage from './pages/LoginPage'
 import VerifyEmail from './pages/VerifyEmail'
 import ResetPassPage from './pages/ResetPassPage'
 import ForgotPassPage from './pages/ForgotPassPage'
+import ContactListPage from './pages/ContactListPage'
 
 function App() {
 
   return (
     <BrowserRouter>
       <Routes>
-        <Route path='/' element={<RegistrationPage/>} /> 
+        <Route path='/' element={<ContactListPage/>} /> 
         <Route path='/registration' element={<RegistrationPage/>} /> 
         <Route path='/login' element={<LoginPage/>} /> 
         <Route path={`/verify/:token`} element={<VerifyEmail/>} /> 
