@@ -5,6 +5,7 @@ import VerifyEmail from './pages/VerifyEmail'
 import ResetPassPage from './pages/ResetPassPage'
 import ForgotPassPage from './pages/ForgotPassPage'
 import ContactListPage from './pages/ContactListPage'
+import CreateContactPage from './pages/CreateContactPage'
 
 function App() {
 
@@ -12,6 +13,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<ContactListPage/>} /> 
+        <Route path='/create' element={<CreateContactPage/>} /> 
         <Route path='/registration' element={<RegistrationPage/>} /> 
         <Route path='/login' element={<LoginPage/>} /> 
         <Route path={`/verify/:token`} element={<VerifyEmail/>} /> 

@@ -25,13 +25,13 @@ const ForgotPassPage = () => {
         <legend className="fieldset-legend">Forgot Password</legend>
 
         <label className="label">Email</label>
-        <input type="email" onChange={(e) => setFormData({ email: e.target.value })} value={formData.email} className="input focus:border-none focus:outline-1 focus:outline-gray-400" placeholder="email" />
+        <input type="email" required onChange={(e) => setFormData({ email: e.target.value })} value={formData.email} className="input focus:border-none focus:outline-1 focus:outline-gray-400" placeholder="email" />
 
         {
           loading ?
             <button className="btn btn-neutral mt-4 rounded-md">Loading ...</button>
             :
-            <button onClick={handleSubmit} className="btn btn-neutral mt-4 rounded-md">Reset Password</button>
+            <button onClick={handleSubmit} className="btn bg-blue-500/80 mt-4 rounded-md">Reset Password</button>
         }
       </fieldset>
     </div>

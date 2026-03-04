@@ -30,7 +30,7 @@ const ResetPassPage = () => {
 
         <label className="label">New Password</label>
         <div className="relative">
-          <input type={showPassword ? 'text' : 'password'} onChange={(e) => setFormData({ ...formData, password: e.target.value })} value={formData.password} className="input focus:border-none focus:outline-1 focus:outline-gray-400" placeholder="password" />
+          <input type={showPassword ? 'text' : 'password'} required onChange={(e) => setFormData({ ...formData, password: e.target.value })} value={formData.password} className="input focus:border-none focus:outline-1 focus:outline-gray-400" placeholder="password" />
           {formData.password &&
             (showPassword ?
               <span onClick={() => setShowPassword(false)} className="absolute top-1/2 -translate-y-1/2 text-lg text-gray-300 right-3 cursor-pointer"><GoEye /></span>
@@ -43,7 +43,7 @@ const ResetPassPage = () => {
           loading ?
             <button className="btn btn-neutral mt-4 rounded-md">Loading ...</button>
             :
-            <button onClick={handleSubmit} className="btn btn-neutral mt-4 rounded-md">Set Password</button>
+            <button onClick={handleSubmit} className="btn bg-blue-500/80 mt-4 rounded-md">Set Password</button>
         }
       </fieldset>
     </div>
