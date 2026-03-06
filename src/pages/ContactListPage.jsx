@@ -1,19 +1,38 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ListItem from '../components/shared/ListItem';
 import SearchBar from '../components/shared/SearchBar';
 import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
-import contactList from '../Data/contactList';
 import EmptyState from '../components/shared/EmptyState';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 
 const ContactListPage = () => {
 
+  const navigate = useNavigate()
+  const [contacts, setContacts] = useState([])
   const [searchTerm, setSearchTerm] = useState('');
 
-  const filteredContacts = contactList.filter((contact) =>
+  const filteredContacts = contacts.filter((contact) =>
     contact.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  useEffect(() => {
+    if (!localStorage.getItem('userInfo')) {
+      navigate('/login')
+    }
+  }, [])
+
+  useEffect(() => {
+    axios.get(`${import.meta.env.VITE_SERVER_URL}/get-contacts`, {
+      headers: {
+        'Authorization': `Bearer ${JSON.parse(localStorage.getItem('userInfo')).accessToken}`
+      }
+    }).then((data) => {
+      setContacts(data.data)
+    })
+  }, [])
 
   return (
     <div className="h-[90vh] flex items-center justify-center p-4 font-sans">
@@ -30,8 +49,8 @@ const ContactListPage = () => {
           {filteredContacts.length <= 0 ?
             <EmptyState text='No Contact Found' />
             :
-            filteredContacts.map((contact) => (
-              <ListItem key={contact.id} imgSrc={contact.src} name={contact.name} phone={contact.phone} />
+            filteredContacts.map((contact, index) => (
+              <ListItem key={index} imgSrc={contact.avatarUrl} name={contact.name} phone={contact.phone} />
             ))}
         </div>
 

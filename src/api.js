@@ -7,7 +7,7 @@ const api = axios.create({
     withCredentials: true
 })
 
-let accessToken = null
+let accessToken = localStorage.getItem('userInfo') ?  JSON.parse(localStorage.getItem('userInfo')).accessToken : null
 export const setToken = token => accessToken = token
 
 api.interceptors.request.use(async (config) => {

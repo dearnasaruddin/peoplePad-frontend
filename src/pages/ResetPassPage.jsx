@@ -28,9 +28,9 @@ const ResetPassPage = () => {
       <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
         <legend className="fieldset-legend">Reset Password</legend>
 
-        <label className="label">New Password</label>
+        <label className="label text-gray-300">New Password</label>
         <div className="relative">
-          <input type={showPassword ? 'text' : 'password'} required onChange={(e) => setFormData({ ...formData, password: e.target.value })} value={formData.password} className="input focus:border-none focus:outline-1 focus:outline-gray-400" placeholder="password" />
+          <input type={showPassword ? 'text' : 'password'} required onChange={(e) => setFormData({ ...formData, password: e.target.value })} value={formData.password} className="input text-gray-300 focus:border-none focus:outline-1 focus:outline-gray-400" placeholder="password" />
           {formData.password &&
             (showPassword ?
               <span onClick={() => setShowPassword(false)} className="absolute top-1/2 -translate-y-1/2 text-lg text-gray-300 right-3 cursor-pointer"><GoEye /></span>

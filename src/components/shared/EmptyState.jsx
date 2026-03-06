@@ -1,9 +1,13 @@
+import {Link} from 'react-router-dom'
 
-const EmptyState = ({text}) => {
+const EmptyState = ({ text }) => {
   return (
     <div className='h-[30dvh] text-center flex justify-center items-center'>
-            <p className='text-gray-300'>{text}</p>
-          </div>
+      <div>
+        <p className='text-gray-300 mb-3'>{text}</p>
+        <Link to={'/create'} className='btn btn-primary'>Create Contact</Link>
+      </div>
+    </div>
   )
 }
 
