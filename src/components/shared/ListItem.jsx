@@ -1,7 +1,7 @@
 import { MdEdit, MdDelete } from "react-icons/md";
 import { getAvatarColor, getInitial } from "../../utils/createAvatar";
 
-const ListItem = ({ imgSrc, name, phone }) => {
+const ListItem = ({ imgSrc, name, phone, handleDelete, id }) => {
     return (
         <div className="flex items-center justify-between p-2 lg:p-4 hover:bg-gray-900 transition-colors duration-150">
 
@@ -28,7 +28,7 @@ const ListItem = ({ imgSrc, name, phone }) => {
                 <button className="bg-blue-500 hover:bg-blue-600 text-white p-1 lg:p-2 rounded-md transition cursor-pointer">
                     <MdEdit className='text-xl' />
                 </button>
-                <button className="bg-[#d9534f] hover:bg-red-600 text-white p-1 lg:p-2 rounded-md transition cursor-pointer">
+                <button onClick={()=>handleDelete(id)} className="bg-[#d9534f] hover:bg-red-600 text-white p-1 lg:p-2 rounded-md transition cursor-pointer">
                     <MdDelete className='text-xl' />
                 </button>
             </div>

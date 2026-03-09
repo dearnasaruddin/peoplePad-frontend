@@ -1,3 +1,4 @@
+import getValidAccessToken from "@/utils/getValidAccessToken"
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
@@ -32,29 +33,33 @@ const CreateContactPage = () => {
     };
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         setLoading(true)
         e.preventDefault()
-        axios.post(`${import.meta.env.VITE_SERVER_URL}/create-contact`, {
+
+        const accessToken = await getValidAccessToken()
+
+        const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/create-contact`, {
             ...formData
         },
             {
                 headers: {
-                    'Authorization': `Bearer ${JSON.parse(localStorage.getItem('userInfo')).accessToken}`,
+                    'Authorization': `Bearer ${accessToken}`,
                     'Content-Type': 'multipart/form-data'
                 }
             }
 
-        ).then((data) => {
-            setFormData({
-                name: '',
-                phone: '',
-                avatar: null
-            })
-            setLoading(false)
-            toast.success(data.data.message)
-            navigate('/')
+        )
+
+        setFormData({
+            name: '',
+            phone: '',
+            avatar: null
         })
+
+        setLoading(false)
+        toast.success(response.data.message)
+        navigate('/')
     }
 
     useEffect(() => {
