@@ -43,7 +43,7 @@ const LoginPage = () => {
   }
 
   useEffect(() => {
-    if (localStorage.getItem('userInfo')) {
+    if (JSON.parse(localStorage.getItem('userInfo')).accessToken) {
       navigate('/')
     }
   }, [])

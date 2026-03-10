@@ -38,6 +38,7 @@ const CreateContactPage = () => {
         e.preventDefault()
 
         const accessToken = await getValidAccessToken()
+        if (!accessToken) return
 
         const response = await axios.post(`${import.meta.env.VITE_SERVER_URL}/create-contact`, {
             ...formData
@@ -63,7 +64,7 @@ const CreateContactPage = () => {
     }
 
     useEffect(() => {
-        if (!localStorage.getItem('userInfo')) {
+        if (!JSON.parse(localStorage.getItem('userInfo')).accessToken) {
             navigate('/login')
         }
     }, [])
