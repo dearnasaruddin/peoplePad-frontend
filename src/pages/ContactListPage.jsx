@@ -61,6 +61,7 @@ const ContactListPage = () => {
       }
     })
 
+    if (response.data?.error) return toast.error(response.data.error)
     toast.success(response.data.message)
     setContacts((prevContacts) => prevContacts.filter(contact => contact._id !== id))
   }
@@ -82,7 +83,7 @@ const ContactListPage = () => {
             <EmptyState text='No Contact Found' />
             :
             filteredContacts.map((contact) => (
-              <ListItem key={contact._id} imgSrc={contact.avatarUrl} name={contact.name} phone={contact.phone} handleDelete={handleDelete} id={contact._id} />
+              <ListItem key={contact._id} contact={contact} handleDelete={handleDelete} />
             ))}
         </div>
 
