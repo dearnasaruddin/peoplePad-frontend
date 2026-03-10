@@ -30,6 +30,7 @@ const LoginPage = () => {
     const data = await dispatch(login(formData))
     localStorage.setItem('userInfo', JSON.stringify(data.payload))
 
+    if(data?.payload?.error) return toast.error(data.payload.error)
     toast.success(data.payload.message)
 
     setFormData({
@@ -43,7 +44,7 @@ const LoginPage = () => {
   }
 
   useEffect(() => {
-    if (JSON.parse(localStorage.getItem('userInfo')).accessToken) {
+    if (JSON.parse(localStorage.getItem('userInfo'))?.accessToken) {
       navigate('/')
     }
   }, [])

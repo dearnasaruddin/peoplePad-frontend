@@ -59,12 +59,13 @@ const CreateContactPage = () => {
         })
 
         setLoading(false)
+        if(response.data?.error) return toast.error(response.data.error)
         toast.success(response.data.message)
         navigate('/')
     }
 
     useEffect(() => {
-        if (!JSON.parse(localStorage.getItem('userInfo')).accessToken) {
+        if (!JSON.parse(localStorage.getItem('userInfo'))?.accessToken) {
             navigate('/login')
         }
     }, [])

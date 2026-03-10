@@ -27,7 +27,7 @@ const ContactListPage = () => {
   }, [searchTerm, contacts])
 
   useEffect(() => {
-    if (!JSON.parse(localStorage.getItem('userInfo')).accessToken) {
+    if (!JSON.parse(localStorage.getItem('userInfo'))?.accessToken) {
       navigate('/login')
     }
   }, [])
@@ -43,7 +43,7 @@ const ContactListPage = () => {
           'Authorization': `Bearer ${accessToken}`
         }
       })
-
+      if (response.data?.error) return toast.error(response.data.error)
       setContacts(response.data)
     }
 
