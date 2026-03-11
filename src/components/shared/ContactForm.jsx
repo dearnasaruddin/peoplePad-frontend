@@ -15,6 +15,7 @@ const ContactForm = ({ contactToEdit }) => {
         phone: '',
         avatar: null
     })
+    const [imagePreviewUrl, setImagePreviewUrl] = useState(null);
 
     useEffect(() => {
         if (contactToEdit) {
@@ -23,6 +24,7 @@ const ContactForm = ({ contactToEdit }) => {
                 phone: contactToEdit.phone || '',
                 avatar: contactToEdit.avatarUrl || null
             });
+            if (contactToEdit?.avatarUrl) setImagePreviewUrl(contactToEdit.avatarUrl);
         }
     }, [contactToEdit]);
 
@@ -38,8 +40,20 @@ const ContactForm = ({ contactToEdit }) => {
         }
     };
 
+    const handleRemoveImage = () => {
+        setFormData({ ...formData, avatar: null });
+        setImagePreviewUrl(null);
+    }
+
     const handleFileChange = (e) => {
-        setFormData({ ...formData, avatar: e.target.files[0] });
+        const file = e.target.files[0]
+        if (file) {
+            setFormData({ ...formData, avatar: file });
+            const tempUrl = URL.createObjectURL(file)
+            setImagePreviewUrl(tempUrl);
+        } else {
+            handleRemoveImage()
+        }
     };
 
 
@@ -50,26 +64,33 @@ const ContactForm = ({ contactToEdit }) => {
         const accessToken = await getValidAccessToken()
         if (!accessToken) return
 
-        const response = await axios({
-            method: contactToEdit ? 'put' : 'post',
-            url: `${import.meta.env.VITE_SERVER_URL}${contactToEdit ? `/update-contact/${contactToEdit._id}` : '/create-contact'}`,
-            data: formData,
-            headers: {
-                'Authorization': `Bearer ${accessToken}`,
-                'Content-Type': 'multipart/form-data'
-            }
-        })
+        const dataToSend = new FormData();
+        dataToSend.append('name', formData.name);
+        dataToSend.append('phone', formData.phone);
 
-        setFormData({
-            name: '',
-            phone: '',
-            avatar: null
-        })
+        if (formData.avatar && typeof formData.avatar !== 'string') {
+            dataToSend.append('avatar', formData.avatar);
+        }
 
-        setLoading(false)
-        if (response.data?.error) return toast.error(response.data.error)
-        toast.success(response.data.message)
-        navigate('/')
+        try {
+            const response = await axios({
+                method: contactToEdit ? 'put' : 'post',
+                url: `${import.meta.env.VITE_SERVER_URL}${contactToEdit ? `/update-contact/${contactToEdit._id}` : '/create-contact'}`,
+                data: dataToSend,
+                headers: {
+                    'Authorization': `Bearer ${accessToken}`,
+                    // 'Content-Type': 'multipart/form-data'
+                }
+            })
+
+            setLoading(false)
+            if (response.data?.error) return toast.error(response.data.error)
+            toast.success(response.data.message)
+            navigate('/')
+        } catch (error) {
+            setLoading(false)
+            toast.error("Something went wrong!")
+        }
     }
 
     return (
@@ -84,20 +105,20 @@ const ContactForm = ({ contactToEdit }) => {
             <input type="tel" name="phone" value={formData?.phone} required inputMode="numeric" onChange={(e) => handleChange(e)} className="input text-gray-300 border focus:border-none focus:outline-1 focus:outline-gray-400" placeholder="phone" />
 
             <label className="label text-gray-300">Profile Image</label>
-            
-            {formData.avatar ? (
+
+            {imagePreviewUrl ? (
                 <div className="mx-auto space-y-2">
-                    <img src={formData.avatar} alt="Current" className="size-14 rounded-full object-cover border border-gray-600" />
+                    <img src={imagePreviewUrl} alt="Preview" className="size-14 rounded-full object-cover border border-gray-600" />
                     <button
                         type="button"
-                        onClick={() => setFormData({ ...formData, avatar: null })}
+                        onClick={handleRemoveImage}
                         className="btn btn-xs btn-error ml-auto"
                     >
-                        Change
+                        {contactToEdit ? 'Remove' : 'Change'}
                     </button>
                 </div>
             ) : (
-   
+
                 <input type="file" name="avatar" accept="image/*" onChange={handleFileChange} className="file-input w-full file-input-neutral text-gray-400 border border-gray-700 focus:border-none focus:outline-1 focus:outline-gray-400" />
             )}
 
