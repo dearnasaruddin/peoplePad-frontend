@@ -8,15 +8,16 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import getValidAccessToken from '@/utils/getValidAccessToken';
 import { toast } from 'sonner';
+import { useSelector } from 'react-redux';
 
 
 const ContactListPage = () => {
 
   const navigate = useNavigate()
+  const auth = useSelector(state => state.auth)
   const [contacts, setContacts] = useState([])
   const [filteredContacts, setFilteredContacts] = useState([])
   const [searchTerm, setSearchTerm] = useState('');
-
 
   useEffect(() => {
     const result = contacts?.filter((contact) =>
@@ -27,7 +28,7 @@ const ContactListPage = () => {
   }, [searchTerm, contacts])
 
   useEffect(() => {
-    if (!JSON.parse(localStorage.getItem('userInfo'))?.accessToken) {
+    if (!auth?.accessToken) {
       navigate('/login')
     }
   }, [])
@@ -72,7 +73,7 @@ const ContactListPage = () => {
 
       <div className="w-full max-w-md bg-base-200 border-gray-700 rounded-xl shadow-2xl overflow-hidden border ">
         {/* Header */}
-        <Header />
+        <Header auth={auth}/>
 
         {/* Search Bar */}
         <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />

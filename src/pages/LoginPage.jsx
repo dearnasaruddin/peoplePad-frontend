@@ -10,7 +10,7 @@ const LoginPage = () => {
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const { loading } = useSelector((state) => state.auth)
+  const { loading, accessToken } = useSelector((state) => state.auth)
 
   const [formData, setFormData] = useState({
     email: '',
@@ -27,11 +27,9 @@ const LoginPage = () => {
 
     e.preventDefault()
 
-    const data = await dispatch(login(formData))
-    localStorage.setItem('userInfo', JSON.stringify(data.payload))
-
-    if(data?.payload?.error) return toast.error(data.payload.error)
-    toast.success(data.payload.message)
+    const response = await dispatch(login(formData))
+    if (response.payload.error) return toast.error(response.payload.error)
+    toast.success(response.payload.message)
 
     setFormData({
       email: '',
@@ -44,7 +42,7 @@ const LoginPage = () => {
   }
 
   useEffect(() => {
-    if (JSON.parse(localStorage.getItem('userInfo'))?.accessToken) {
+    if (accessToken) {
       navigate('/')
     }
   }, [])

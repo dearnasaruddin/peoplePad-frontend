@@ -1,16 +1,14 @@
 import { Link } from 'react-router-dom'
-import { FaUser } from "react-icons/fa";
 import { IoMdAdd } from "react-icons/io";
+import ProfileDropdown from '../shared/ProfileDropdown';
 
-const Header = () => {
+const Header = ({auth}) => {
     return (
         <div className="bg-blue-500/80 p-2 lg:p-4 flex justify-between items-center text-white">
 
             {/* User */}
-            <div className="size-8 lg:size-10 flex justify-center items-center border rounded-full cursor-pointer">
-                <div className="tooltip tooltip-bottom" data-tip="profile">
-                    <FaUser className="lg:text-2xl m-1" />
-                </div>
+            <div className="size-8 lg:size-10 flex justify-center items-center border rounded-full cursor-pointer tooltip tooltip-bottom capitalize" data-tip={auth?.user?.username || 'profile'}>
+                <ProfileDropdown auth={auth}/>
             </div>
 
             <h1 className="text-xl font-semibold tracking-wide">PeoplePad</h1>

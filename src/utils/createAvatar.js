@@ -14,7 +14,7 @@ const avatarColors = [
 
 export const getAvatarColor = (name) => {
     let hash = 0;
-    for (let i = 0; i < name.length; i++) {
+    for (let i = 0; i < name?.length; i++) {
         hash = hash * 31 + name.charCodeAt(i);
     }
 
@@ -22,4 +22,4 @@ export const getAvatarColor = (name) => {
     return avatarColors[index];
 };
 
-export const getInitial = (name) => name.charAt(0).toUpperCase()
+export const getInitial = (name) => name?.charAt(0).toUpperCase()

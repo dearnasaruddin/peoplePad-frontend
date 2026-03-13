@@ -20,7 +20,7 @@ const getValidAccessToken = async () => {
             return userInfo?.accessToken;
         }
     } catch (error) {
-        console.error("Token handling error:", error);
+        console.error("Token handling error:", error.message);
         return null
     }
 
