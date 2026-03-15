@@ -72,6 +72,19 @@ export const authSlice = createSlice({
         clearMessages: (state) => {
             state.message = null
             state.error = null
+        },
+        updateUserProfile: (state, action) => {
+         
+            state.user = {
+                ...state.user,
+                ...action.payload
+            };
+
+            const existingUser = JSON.parse(localStorage.getItem('userInfo'));
+            if (existingUser) {
+                existingUser.user = state.user;
+                localStorage.setItem('userInfo', JSON.stringify(existingUser));
+            }
         }
     },
 
@@ -254,5 +267,5 @@ export const authSlice = createSlice({
 //     }
 // })
 
-export const { logout } = authSlice.actions
+export const { logout, clearMessages, updateUserProfile } = authSlice.actions
 export default authSlice.reducer

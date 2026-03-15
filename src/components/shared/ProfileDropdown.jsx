@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux"
 import { LogOut, Settings, User, Pencil } from "lucide-react"
 import { logout } from "@/features/auth/authSlice"
 import { getAvatarColor, getInitial } from "@/utils/createAvatar"
-import {useNavigate} from 'react-router-dom'
+import {useNavigate, Link} from 'react-router-dom'
 
 import {
     DropdownMenu,
@@ -28,7 +28,6 @@ const ProfileDropdown = ({ auth }) => {
 
             {/* Avatar Trigger */}
             <DropdownMenuTrigger asChild>
-
                 <div className={`size-full rounded-full flex items-center justify-center text-white text-xl font-medium select-none ${getAvatarColor(auth?.user?.username)}`}>
                     {getInitial(auth?.user?.username)}
                 </div>
@@ -50,9 +49,11 @@ const ProfileDropdown = ({ auth }) => {
                     </div>
                 </DropdownMenuLabel>
                 <DropdownMenuSeparator className={'bg-gray-500'}/>
-                <DropdownMenuItem className="gap-2 cursor-pointer">
+                <DropdownMenuItem className="p-0 gap-2 cursor-pointer">
+                    <Link to={'/edit-profile'} className="flex gap-2 items-center py-1.5 px-2 w-full">
                     <Pencil />
                     Edit Profile
+                    </Link>
                 </DropdownMenuItem>
 
                 <DropdownMenuItem className="gap-2 cursor-pointer">

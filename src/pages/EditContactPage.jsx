@@ -6,7 +6,7 @@ const EditContactPage = () => {
     const location = useLocation()
     return (
         <div className='flex flex-col justify-center items-center h-[80vh]'>
-            <ContactForm contactToEdit={location.state} />
+            <ContactForm contactToEdit={location.state} heading='Edit Contact' />
         </div>
     )
 }

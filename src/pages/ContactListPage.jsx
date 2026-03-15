@@ -79,7 +79,7 @@ const ContactListPage = () => {
         <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 
         {/* List Items */}
-        <div className="divide-y divide-gray-700 max-h-[52dvh] overflow-auto">
+        <div className="divide-y divide-gray-700 max-h-[42dvh] overflow-auto">
           {filteredContacts.length <= 0 ?
             <EmptyState text='No Contact Found' />
             :

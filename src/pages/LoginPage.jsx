@@ -68,9 +68,9 @@ const LoginPage = () => {
         <Link className="text-blue-400 ml-2" to={'/forgot-password'}>Forgot password?</Link>
         {
           loading ?
-            <button className="btn btn-neutral mt-4 rounded-md">Loading ...</button>
+            <button className="btn btn-neutral mt-3 rounded-md">Loading ...</button>
             :
-            <button type="submit" className="btn bg-blue-500/80 mt-4 rounded-md">Login</button>
+            <button type="submit" className="btn bg-blue-500/80 mt-3 rounded-md">Login</button>
         }
         <p className="text-center mt-2 text-gray-300">Haven't any account?<Link className="text-blue-400 ml-2" to={'/registration'}>Create Account</Link> </p>
       </form>

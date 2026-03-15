@@ -8,6 +8,7 @@ import ContactListPage from './pages/ContactListPage'
 import CreateContactPage from './pages/CreateContactPage'
 import { Toaster } from './components/ui/sonner'
 import EditContactPage from './pages/EditContactPage'
+import EditProfilePage from './pages/EditProfilePage'
 
 function App() {
 
@@ -16,8 +17,9 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<ContactListPage />} />
-          <Route path='/create' element={<CreateContactPage />} />
-          <Route path='/edit' element={<EditContactPage />} />
+          <Route path='/edit-profile' element={<EditProfilePage />} />
+          <Route path='/create-contact' element={<CreateContactPage />} />
+          <Route path='/edit-contact' element={<EditContactPage />} />
           <Route path='/registration' element={<RegistrationPage />} />
           <Route path='/login' element={<LoginPage />} />
           <Route path={`/verify/:token`} element={<VerifyEmail />} />

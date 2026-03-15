@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 
 
-const ContactForm = ({ contactToEdit }) => {
+const ContactForm = ({ contactToEdit, heading }) => {
 
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
@@ -96,7 +96,7 @@ const ContactForm = ({ contactToEdit }) => {
     return (
 
         <form onSubmit={(e) => handleSubmit(e)} className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-            <legend className="fieldset-legend">Create Contact</legend>
+            <legend className="fieldset-legend">{heading}</legend>
 
             <label className="label text-gray-300">Full Name</label>
             <input type="text" name="name" value={formData?.name} required onChange={(e) => handleChange(e)} className="input text-gray-300 border focus:border-none focus:outline-1 focus:outline-gray-400" placeholder="full name" />

@@ -26,7 +26,7 @@ const ListItem = ({ contact, handleDelete }) => {
 
             {/* Action Buttons */}
             <div className="flex items-center gap-2">
-                <Link to={'/edit'} state={contact} className="bg-blue-500 hover:bg-blue-600 text-white p-1 lg:p-2 rounded-md transition cursor-pointer">
+                <Link to={'/edit-contact'} state={contact} className="bg-blue-500 hover:bg-blue-600 text-white p-1 lg:p-2 rounded-md transition cursor-pointer">
                     <MdEdit className='text-xl' />
                 </Link>
                 <button onClick={() => handleDelete(contact?._id)} className="bg-[#d9534f] hover:bg-red-600 text-white p-1 lg:p-2 rounded-md transition cursor-pointer">
