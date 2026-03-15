@@ -5,7 +5,7 @@ const EmptyState = ({ text }) => {
     <div className='h-[30dvh] text-center flex justify-center items-center'>
       <div>
         <p className='text-gray-300 mb-3'>{text}</p>
-        <Link to={'/create'} className='btn btn-primary'>Create Contact</Link>
+        <Link to={'/create-contact'} className='btn btn-primary'>Create Contact</Link>
       </div>
     </div>
   )
