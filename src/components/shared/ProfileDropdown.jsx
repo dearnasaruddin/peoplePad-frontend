@@ -28,9 +28,15 @@ const ProfileDropdown = ({ auth }) => {
 
             {/* Avatar Trigger */}
             <DropdownMenuTrigger asChild>
-                <div className={`size-full rounded-full flex items-center justify-center text-white text-xl font-medium select-none ${getAvatarColor(auth?.user?.username)}`}>
-                    {getInitial(auth?.user?.username)}
-                </div>
+                {auth?.user.avatarUrl ? (
+                    <div className="size-full rounded-full overflow-hidden">
+                        <img src={auth?.user.avatarUrl} alt={auth?.username} className="w-full h-full object-cover" />
+                    </div>
+                ) : (
+                    <div className={`size-full rounded-full flex items-center justify-center text-white text-xl font-medium select-none ${getAvatarColor(auth?.user.username)}`}>
+                        {getInitial(auth?.user.username)}
+                    </div>
+                )}
             </DropdownMenuTrigger>
 
             {/* Dropdown */}

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { GoEye, GoEyeClosed } from "react-icons/go";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { registration, updateUserProfile } from "../../features/auth/authSlice";
 import { toast } from "sonner";
@@ -12,7 +12,6 @@ const UserForm = ({ heading, userToEdit }) => {
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const { loading } = useSelector((state) => state.auth)
 
     const [formData, setFormData] = useState({
         username: '',
@@ -21,6 +20,7 @@ const UserForm = ({ heading, userToEdit }) => {
         avatar: null
     })
     const [showPassword, setShowPassword] = useState(false);
+    const [loadingState, setLoadingState] = useState(false);
     const [imagePreviewUrl, setImagePreviewUrl] = useState(null)
 
     useEffect(() => {
@@ -57,7 +57,7 @@ const UserForm = ({ heading, userToEdit }) => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-
+        setLoadingState(true)
         if (userToEdit) {
             const accessToken = await getValidAccessToken()
             if (!accessToken) return
@@ -95,6 +95,8 @@ const UserForm = ({ heading, userToEdit }) => {
                 setTimeout(() => {
                     navigate('/')
                 }, 1500);
+                
+                setLoadingState(false)
             } catch (error) {
                 toast.error("Something went wrong!")
             }
@@ -116,6 +118,8 @@ const UserForm = ({ heading, userToEdit }) => {
                 setTimeout(() => {
                     navigate('/login')
                 }, 1500);
+
+                setLoadingState(false)
             } catch (error) {
                 toast.error("Something went wrong!")
             }
@@ -170,7 +174,7 @@ const UserForm = ({ heading, userToEdit }) => {
             }
 
             {
-                loading ?
+                loadingState ?
                     <button className="btn btn-neutral mt-4 rounded-md">Loading ...</button>
                     :
 
