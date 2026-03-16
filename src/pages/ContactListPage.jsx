@@ -8,12 +8,14 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import getValidAccessToken from '@/utils/getValidAccessToken';
 import { toast } from 'sonner';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateUserProfile } from '@/features/auth/authSlice';
 
 
 const ContactListPage = () => {
 
   const navigate = useNavigate()
+  const dispatch = useDispatch()
   const auth = useSelector(state => state.auth)
   const [contacts, setContacts] = useState([])
   const [filteredContacts, setFilteredContacts] = useState([])
@@ -34,21 +36,39 @@ const ContactListPage = () => {
   }, [])
 
   useEffect(() => {
-    const fetchContact = async () => {
+    const fetchInitialData = async () => {
 
       const accessToken = await getValidAccessToken()
       if (!accessToken) return
 
-      const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/get-contacts`, {
-        headers: {
-          'Authorization': `Bearer ${accessToken}`
-        }
-      })
-      if (response.data?.error) return toast.error(response.data.error)
-      setContacts(response.data)
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/get-contacts`, {
+          headers: {
+            'Authorization': `Bearer ${accessToken}`
+          }
+        })
+        if (response.data?.error) return toast.error(response.data.error)
+        setContacts(response.data)
+
+        const userResponse = await axios.get(`${import.meta.env.VITE_SERVER_URL}/user/me`, {
+          headers: { 'Authorization': `Bearer ${accessToken}` }
+        })
+
+        if (userResponse.data?.error) return toast.error(response.data.error)
+
+        dispatch(updateUserProfile({
+          username: userResponse.data.username,
+          email: userResponse.data.email,
+          avatarUrl: userResponse.data.avatarUrl || null
+        }))
+
+
+      } catch (error) {
+        console.log("Error fetching initial data", error)
+      }
     }
 
-    fetchContact()
+    fetchInitialData()
   }, [])
 
 
@@ -73,7 +93,7 @@ const ContactListPage = () => {
 
       <div className="w-full max-w-md bg-base-200 border-gray-700 rounded-xl shadow-2xl overflow-hidden border ">
         {/* Header */}
-        <Header auth={auth}/>
+        <Header auth={auth} />
 
         {/* Search Bar */}
         <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
