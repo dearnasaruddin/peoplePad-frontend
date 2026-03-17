@@ -10,6 +10,7 @@ import getValidAccessToken from '@/utils/getValidAccessToken';
 import { toast } from 'sonner';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateUserProfile } from '@/features/auth/authSlice';
+import CommonLayout from '@/components/layout/CommonLayout';
 
 
 const ContactListPage = () => {
@@ -89,31 +90,24 @@ const ContactListPage = () => {
 
 
   return (
-    <div className="h-[90vh] flex items-center justify-center p-4 font-sans">
+    <CommonLayout>
+      {/* Search Bar */}
+      <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
 
-      <div className="w-full max-w-md bg-base-200 border-gray-700 rounded-xl shadow-2xl overflow-hidden border ">
-        {/* Header */}
-        <Header auth={auth} />
-
-        {/* Search Bar */}
-        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-
-        {/* List Items */}
-        <div className="divide-y divide-gray-700 max-h-[42dvh] overflow-auto">
-          {filteredContacts.length <= 0 ?
-            <EmptyState text='No Contact Found' />
-            :
-            filteredContacts.map((contact) => (
-              <ListItem key={contact._id} contact={contact} handleDelete={handleDelete} />
-            ))}
-        </div>
-
-        {/* Footer */}
-        <Footer itemCount={filteredContacts.length} />
-
+      {/* List Items */}
+      <div className="divide-y divide-gray-700 max-h-[42dvh] overflow-auto">
+        {filteredContacts.length <= 0 ?
+          <EmptyState text='No Contact Found' />
+          :
+          filteredContacts.map((contact) => (
+            <ListItem key={contact._id} contact={contact} handleDelete={handleDelete} />
+          ))}
       </div>
 
-    </div>
+      {/* Footer */}
+      <Footer itemCount={filteredContacts.length} />
+
+    </CommonLayout>
   );
 };
 

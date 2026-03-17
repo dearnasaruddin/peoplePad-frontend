@@ -8,7 +8,7 @@ import { useEffect } from "react";
 import getValidAccessToken from "@/utils/getValidAccessToken";
 import axios from "axios";
 
-const UserForm = ({ heading, userToEdit }) => {
+const UserForm = ({ userToEdit }) => {
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -94,8 +94,8 @@ const UserForm = ({ heading, userToEdit }) => {
 
                 setTimeout(() => {
                     navigate('/')
-                }, 1500);
-                
+                }, 1000);
+
                 setLoadingState(false)
             } catch (error) {
                 toast.error("Something went wrong!")
@@ -117,7 +117,7 @@ const UserForm = ({ heading, userToEdit }) => {
 
                 setTimeout(() => {
                     navigate('/login')
-                }, 1500);
+                }, 1000);
 
                 setLoadingState(false)
             } catch (error) {
@@ -129,14 +129,17 @@ const UserForm = ({ heading, userToEdit }) => {
 
 
     return (
-        <form onSubmit={handleSubmit} className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-            <legend className="fieldset-legend">{heading}</legend>
+        <form onSubmit={handleSubmit} className={`fieldset bg-base-200 border-base-300 rounded-box  ${userToEdit ? 'w-full' : 'w-xs'} border p-4`}>
+
+            {!userToEdit &&
+                <legend className="fieldset-legend">Registration</legend>
+            }
 
             <label className="label text-gray-300">Username</label>
-            <input type="text" required name="username" onChange={handleChange} value={formData.username} className="input text-gray-300 border focus:border-none focus:outline-1 focus:outline-gray-400" placeholder="username" />
+            <input type="text" required name="username" onChange={handleChange} value={formData.username} className={`input ${userToEdit ? 'w-full' : ''} text-gray-300 border focus:border-none focus:outline-1 focus:outline-gray-400`} placeholder="username" />
 
             <label className="label text-gray-300">Email</label>
-            <input type="email" required name="email" onChange={handleChange} value={formData.email} className="input text-gray-300 border focus:border-none focus:outline-1 focus:outline-gray-400" placeholder="email" />
+            <input type="email" required name="email" onChange={handleChange} value={formData.email} className={`input  ${userToEdit ? 'w-full' : ''} text-gray-300 border focus:border-none focus:outline-1 focus:outline-gray-400`} placeholder="email" />
 
             {userToEdit ?
                 <>
@@ -144,11 +147,11 @@ const UserForm = ({ heading, userToEdit }) => {
                     {imagePreviewUrl ?
                         (
                             <div className="mx-auto space-y-2">
-                                <img src={imagePreviewUrl} alt="Preview" className="size-14 rounded-full object-cover border border-gray-600" />
+                                <img src={imagePreviewUrl} alt="Preview" className="size-14 lg:size-20 rounded-full object-cover mx-auto border border-gray-600" />
                                 <button
                                     type="button"
                                     onClick={handleRemoveImage}
-                                    className="btn btn-xs btn-error ml-auto"
+                                    className="btn btn-error text-xs lg:text-sm h-7 px-2 lg:px-3"
                                 >
                                     {userToEdit ? 'Remove' : 'Change'}
                                 </button>
@@ -162,7 +165,7 @@ const UserForm = ({ heading, userToEdit }) => {
                 <>
                     <label className="label text-gray-300">Password</label>
                     <div className="relative">
-                        <input type={showPassword ? 'text' : 'password'} required name="password" onChange={handleChange} value={formData.password} className="input text-gray-300 border focus:border-none focus:outline-1 focus:outline-gray-400" placeholder="password" />
+                        <input type={showPassword ? 'text' : 'password'} required name="password" onChange={handleChange} value={formData.password} className={`input  ${userToEdit ? 'w-full' : ''} text-gray-300 border focus:border-none focus:outline-1 focus:outline-gray-400`} placeholder="password" />
                         {formData.password &&
                             (showPassword ?
                                 <span onClick={() => setShowPassword(false)} className="absolute top-1/2 -translate-y-1/2 text-lg text-gray-300 right-3 cursor-pointer"><GoEye /></span>
@@ -178,13 +181,12 @@ const UserForm = ({ heading, userToEdit }) => {
                     <button className="btn btn-neutral mt-4 rounded-md">Loading ...</button>
                     :
 
-                    userToEdit ?
-                        <div className="flex gap-2.5 items-center mt-4">
-                            <Link to={'/'} className="btn grow btn-neutral rounded-md">Cancel</Link>
-                            <button type="submit" className="btn grow bg-blue-500/80 rounded-md">Save</button>
-                        </div>
-                        :
-                        <button type="submit" className="btn bg-blue-500/80 mt-4 rounded-md">Create account</button>
+                    (
+                        userToEdit ?
+                            <button type="submit" className="btn grow bg-blue-500/80 mt-4 rounded-md">Save</button>
+                            :
+                            <button type="submit" className="btn bg-blue-500/80 mt-4 rounded-md">Create account</button>
+                    )
             }
 
             {!userToEdit &&

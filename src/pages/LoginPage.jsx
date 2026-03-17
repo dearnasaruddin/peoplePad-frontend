@@ -38,7 +38,7 @@ const LoginPage = () => {
 
     setTimeout(() => {
       navigate("/")
-    }, 1500);
+    }, 1000);
   }
 
   useEffect(() => {
