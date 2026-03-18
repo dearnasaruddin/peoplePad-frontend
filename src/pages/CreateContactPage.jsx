@@ -1,3 +1,4 @@
+import CommonLayout from "@/components/layout/CommonLayout"
 import ContactForm from "@/components/shared/ContactForm"
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
@@ -15,9 +16,9 @@ const CreateContactPage = () => {
     }, [])
 
     return (
-        <div className="flex flex-col justify-center items-center h-[80vh]">
-            <ContactForm heading='Create Contact'/>
-        </div>
+        <CommonLayout heading='Create Contact'>
+            <ContactForm />
+        </CommonLayout>
     )
 }
 

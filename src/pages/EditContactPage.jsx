@@ -1,13 +1,14 @@
 import { useLocation } from 'react-router-dom';
 import ContactForm from "@/components/shared/ContactForm"
+import CommonLayout from '@/components/layout/CommonLayout';
 
 
 const EditContactPage = () => {
     const location = useLocation()
     return (
-        <div className='flex flex-col justify-center items-center h-[80vh]'>
-            <ContactForm contactToEdit={location.state} heading='Edit Contact' />
-        </div>
+        <CommonLayout heading='Edit Contact'>
+            <ContactForm contactToEdit={location.state} />
+        </CommonLayout>
     )
 }
 

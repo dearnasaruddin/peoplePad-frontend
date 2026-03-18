@@ -11,7 +11,7 @@ const Header = ({ auth, heading = 'PeoplePad' }) => {
     const [isHomeRoute, setIsHomeRoute] = useState(pathname == '/')
 
     return (
-        <div className={`bg-blue-500/80 p-2 lg:p-4  text-white flex items-center ${isHomeRoute ? 'justify-between ' : 'pr-10'}`}>
+        <div className={`bg-blue-500/80 text-white flex items-center ${isHomeRoute ? 'justify-between p-2 lg:p-4' : 'py-2 lg:py-4 pl-2 lg:pl-4 pr-6 lg:pr-10'}`}>
 
             {isHomeRoute ?
                 <>

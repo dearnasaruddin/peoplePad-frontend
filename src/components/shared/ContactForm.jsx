@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
 
 
-const ContactForm = ({ contactToEdit, heading }) => {
+const ContactForm = ({ contactToEdit }) => {
 
     const navigate = useNavigate()
     const [loading, setLoading] = useState(false)
@@ -95,14 +95,13 @@ const ContactForm = ({ contactToEdit, heading }) => {
 
     return (
 
-        <form onSubmit={(e) => handleSubmit(e)} className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
-            <legend className="fieldset-legend">{heading}</legend>
+        <form onSubmit={(e) => handleSubmit(e)} className="fieldset bg-base-200 border-base-300 rounded-box w-full border p-4">
 
             <label className="label text-gray-300">Full Name</label>
-            <input type="text" name="name" value={formData?.name} required onChange={(e) => handleChange(e)} className="input text-gray-300 border focus:border-none focus:outline-1 focus:outline-gray-400" placeholder="full name" />
+            <input type="text" name="name" value={formData?.name} required onChange={(e) => handleChange(e)} className='input text-gray-300 border focus:border-none focus:outline-1 focus:outline-gray-400 w-full' placeholder="full name" />
 
             <label className="label text-gray-300">Phone</label>
-            <input type="tel" name="phone" value={formData?.phone} required inputMode="numeric" onChange={(e) => handleChange(e)} className="input text-gray-300 border focus:border-none focus:outline-1 focus:outline-gray-400" placeholder="phone" />
+            <input type="tel" name="phone" value={formData?.phone} required inputMode="numeric" onChange={(e) => handleChange(e)} className='input text-gray-300 border focus:border-none focus:outline-1 focus:outline-gray-400 w-full' placeholder="phone" />
 
             <label className="label text-gray-300">Profile Image</label>
 
@@ -127,10 +126,7 @@ const ContactForm = ({ contactToEdit, heading }) => {
                     <button className="btn">Loading...</button>
 
                     :
-                    <div className="flex gap-2.5 items-center mt-4">
-                        <Link to={'/'} className="btn grow btn-neutral rounded-md">Cancel</Link>
-                        <button type="submit" className="btn grow bg-blue-500/80 rounded-md">Save</button>
-                    </div>
+                    <button type="submit" className="btn grow bg-blue-500/80 rounded-md mt-4">Save</button>
             }
         </form>
 
