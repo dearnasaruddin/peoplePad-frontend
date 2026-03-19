@@ -12,7 +12,7 @@ const CommonLayout = ({children, heading}) => {
             <div className="w-full max-w-md bg-base-200 border-gray-700 rounded-xl shadow-2xl overflow-hidden border ">
                 {/* Header */}
                 <Header heading={heading} auth={auth} />
-                <div>
+                <div className='h-[45dvh]'>
                     {children}
                 </div>
             </div>

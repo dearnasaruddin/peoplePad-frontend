@@ -87,25 +87,28 @@ const ContactListPage = () => {
     toast.success(response.data.message)
     setContacts((prevContacts) => prevContacts.filter(contact => contact._id !== id))
   }
-
+  // lg:h-[calc(100% - 72px)]
 
   return (
     <CommonLayout>
-      {/* Search Bar */}
-      <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+      <div className='flex flex-col h-full'>
 
-      {/* List Items */}
-      <div className="divide-y divide-gray-700 max-h-[42dvh] overflow-auto">
-        {filteredContacts.length <= 0 ?
-          <EmptyState text='No Contact Found' />
-          :
-          filteredContacts.map((contact) => (
-            <ListItem key={contact._id} contact={contact} handleDelete={handleDelete} />
-          ))}
+        {/* Search Bar */}
+        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+
+        {/* List Items */}
+        <div className="divide-y divide-gray-700 overflow-auto">
+          {filteredContacts.length <= 0 ?
+            <EmptyState text='No Contact Found' />
+            :
+            filteredContacts.map((contact) => (
+              <ListItem key={contact._id} contact={contact} handleDelete={handleDelete} />
+            ))}
+        </div>
+
+        {/* Footer */}
+        <Footer itemCount={filteredContacts.length} />
       </div>
-
-      {/* Footer */}
-      <Footer itemCount={filteredContacts.length} />
 
     </CommonLayout>
   );
