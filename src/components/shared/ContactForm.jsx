@@ -107,11 +107,11 @@ const ContactForm = ({ contactToEdit }) => {
 
             {imagePreviewUrl ? (
                 <div className="mx-auto space-y-2">
-                    <img src={imagePreviewUrl} alt="Preview" className="size-14 rounded-full object-cover border border-gray-600" />
+                    <img src={imagePreviewUrl} alt="Preview" className="size-14 lg:size-24 rounded-full object-cover mx-auto border border-gray-600" />
                     <button
                         type="button"
                         onClick={handleRemoveImage}
-                        className="btn btn-xs btn-error ml-auto"
+                        className="btn btn-error text-xs lg:text-sm h-7 px-2 lg:px-6"
                     >
                         {contactToEdit ? 'Remove' : 'Change'}
                     </button>
@@ -123,7 +123,7 @@ const ContactForm = ({ contactToEdit }) => {
 
             {
                 loading ?
-                    <button className="btn">Loading...</button>
+                    <button className="btn mt-4">Loading...</button>
 
                     :
                     <button type="submit" className="btn grow bg-blue-500/80 rounded-md mt-4">Save</button>

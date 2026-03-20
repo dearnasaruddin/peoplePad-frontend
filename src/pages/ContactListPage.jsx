@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import ListItem from '../components/shared/ListItem';
+import ContactListItem from '../components/shared/ContactListItem';
 import SearchBar from '../components/shared/SearchBar';
-import Header from '../components/layout/Header';
 import Footer from '../components/layout/Footer';
 import EmptyState from '../components/shared/EmptyState';
 import { useNavigate } from 'react-router-dom';
@@ -102,7 +101,7 @@ const ContactListPage = () => {
             <EmptyState text='No Contact Found' />
             :
             filteredContacts.map((contact) => (
-              <ListItem key={contact._id} contact={contact} handleDelete={handleDelete} />
+              <ContactListItem key={contact._id} contact={contact} handleDelete={handleDelete} />
             ))}
         </div>
 

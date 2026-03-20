@@ -8,10 +8,10 @@ const EditProfilePage = () => {
 
   return (
     <CommonLayout heading='Edit Profile'>
-   <div className="flex flex-col justify-center items-center">
-     <UserForm userToEdit={userToEdit}/>
-   </div>
-   </CommonLayout>
+      <div className="flex flex-col justify-center items-center">
+        <UserForm userToEdit={userToEdit} />
+      </div>
+    </CommonLayout>
   )
 }
 

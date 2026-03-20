@@ -16,7 +16,7 @@ const Header = ({ auth, heading = 'PeoplePad' }) => {
             {isHomeRoute ?
                 <>
                     {/* User */}
-                    <div div className="size-8 lg:size-10 flex justify-center items-center border border-blue-300 rounded-full cursor-pointer tooltip tooltip-bottom capitalize" data-tip='profile'>
+                    <div className="size-8 lg:size-10 flex justify-center items-center border border-blue-300 rounded-full cursor-pointer tooltip tooltip-bottom capitalize" data-tip='profile'>
                         <ProfileDropdown auth={auth} />
                     </div>
                 </>

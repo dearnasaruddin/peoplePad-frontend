@@ -147,11 +147,11 @@ const UserForm = ({ userToEdit }) => {
                     {imagePreviewUrl ?
                         (
                             <div className="mx-auto space-y-2">
-                                <img src={imagePreviewUrl} alt="Preview" className="size-14 lg:size-20 rounded-full object-cover mx-auto border border-gray-600" />
+                                <img src={imagePreviewUrl} alt="Preview" className="size-14 lg:size-24 rounded-full object-cover mx-auto border border-gray-600" />
                                 <button
                                     type="button"
                                     onClick={handleRemoveImage}
-                                    className="btn btn-error text-xs lg:text-sm h-7 px-2 lg:px-3"
+                                    className="btn btn-error text-xs lg:text-sm h-7 px-2 lg:px-6"
                                 >
                                     {userToEdit ? 'Remove' : 'Change'}
                                 </button>

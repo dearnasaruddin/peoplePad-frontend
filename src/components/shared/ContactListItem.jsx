@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom'
 import { MdEdit, MdDelete } from "react-icons/md";
 import { getAvatarColor, getInitial } from "../../utils/createAvatar";
 
-const ListItem = ({ contact, handleDelete }) => {
+const ContactListItem = ({ contact, handleDelete }) => {
     return (
-        <div className="flex items-center justify-between p-2 lg:p-4 hover:bg-gray-900 transition-colors duration-150">
+        <div className="flex items-center justify-between p-2 lg:p-3 hover:bg-gray-900 transition-colors duration-150">
 
             {/* Avatar & Info */}
             <div className="flex items-center gap-2 lg:gap-4">
@@ -38,4 +38,4 @@ const ListItem = ({ contact, handleDelete }) => {
     )
 }
 
-export default ListItem
+export default ContactListItem
