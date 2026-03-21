@@ -9,7 +9,7 @@ const CommonLayout = ({children, heading}) => {
     return (
         <div className="h-[90vh] flex items-center justify-center p-4 font-sans">
 
-            <div className="w-full max-w-md bg-base-200 border-gray-700 rounded-xl shadow-2xl overflow-hidden border ">
+            <div className="w-full max-w-md bg-gray-800 border-gray-700 rounded-xl shadow-2xl overflow-hidden border ">
                 {/* Header */}
                 <Header heading={heading} auth={auth} />
                 <div className='h-[52dvh]'>

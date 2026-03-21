@@ -30,7 +30,7 @@ const ContactListPage = () => {
   }, [searchTerm, contacts])
 
   useEffect(() => {
-    if (!auth?.accessToken) {
+    if (!auth.accessToken) {
       navigate('/login')
     }
   }, [])

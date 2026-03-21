@@ -4,9 +4,9 @@ import { GrLanguage } from "react-icons/gr";
 
 const SettingsListItem = ({heading}) => {
     return (
-        <div className='flex items-center gap-3 p-2 lg:p-3 hover:bg-gray-900 transition-colors duration-150 cursor-pointer'>
+        <div className='flex items-center gap-3 p-2 lg:p-3 transition-colors duration-150 text-gray-200'>
             {/* icon */}
-            <div className={`size-8 lg:size-10 flex justify-center items-center text-gray-200 text-xl rounded-md lg:rounded-lg ${getAvatarColor(heading)} `}>
+            <div className={`size-8 lg:size-10 flex justify-center items-center  text-xl rounded-md lg:rounded-lg ${getAvatarColor(heading)} `}>
             { heading.includes('password') &&  <FaKey />}
             { heading.includes('Notifications') && <FaBell />}
             { heading.includes('privacy') && <FaLock />}
@@ -15,7 +15,7 @@ const SettingsListItem = ({heading}) => {
             </div>
 
             {/* text */}
-            <div className="text-gray-200 font-semibold text-sm lg:text-base">
+            <div className=" font-semibold text-sm lg:text-base">
                 {heading}
             </div>
         </div>

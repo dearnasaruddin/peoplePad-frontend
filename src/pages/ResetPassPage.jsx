@@ -25,7 +25,7 @@ const ResetPassPage = () => {
 
   return (
     <div className="flex flex-col justify-center items-center h-[80dvh]">
-      <fieldset className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+      <fieldset className="fieldset bg-gray-800 border-base-300 rounded-box w-xs border p-4">
         <legend className="fieldset-legend">Reset Password</legend>
 
         <label className="label text-gray-300">New Password</label>

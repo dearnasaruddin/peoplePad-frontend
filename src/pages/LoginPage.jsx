@@ -49,7 +49,7 @@ const LoginPage = () => {
 
   return (
     <div className="flex flex-col justify-center items-center h-[80vh]">
-      <form onSubmit={handleSubmit} className="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+      <form onSubmit={handleSubmit} className="fieldset bg-gray-800 border-base-300 rounded-box w-xs border p-4">
         <legend className="fieldset-legend">Login</legend>
 
         <label className="label text-gray-300">Email</label>
@@ -68,9 +68,9 @@ const LoginPage = () => {
         <Link className="text-blue-400 ml-2" to={'/forgot-password'}>Forgot password?</Link>
         {
           loading ?
-            <button className="btn btn-neutral mt-3 rounded-md">Loading ...</button>
+            <button className="btn border-none btn-neutral mt-3 rounded-md">Loading ...</button>
             :
-            <button type="submit" className="btn bg-blue-500/80 mt-3 rounded-md">Login</button>
+            <button type="submit" className="btn border-none bg-blue-500/80 mt-3 rounded-md">Login</button>
         }
         <p className="text-center mt-2 text-gray-300">Haven't any account?<Link className="text-blue-400 ml-2" to={'/registration'}>Create Account</Link> </p>
       </form>

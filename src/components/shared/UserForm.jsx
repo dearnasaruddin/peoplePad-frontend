@@ -129,7 +129,7 @@ const UserForm = ({ userToEdit }) => {
 
 
     return (
-        <form onSubmit={handleSubmit} className={`fieldset bg-base-200 border-base-300 rounded-box  ${userToEdit ? 'w-full' : 'w-xs'} border p-4`}>
+        <form onSubmit={handleSubmit} className={`fieldset bg-gray-800 border-base-300 rounded-box  ${userToEdit ? 'w-full' : 'w-xs'} border p-4`}>
 
             {!userToEdit &&
                 <legend className="fieldset-legend">Registration</legend>
@@ -151,7 +151,7 @@ const UserForm = ({ userToEdit }) => {
                                 <button
                                     type="button"
                                     onClick={handleRemoveImage}
-                                    className="btn btn-error text-xs lg:text-sm h-7 px-2 lg:px-6"
+                                    className="btn btn-error border-none text-xs lg:text-sm h-7 px-2 lg:px-6"
                                 >
                                     {userToEdit ? 'Remove' : 'Change'}
                                 </button>
@@ -178,14 +178,14 @@ const UserForm = ({ userToEdit }) => {
 
             {
                 loadingState ?
-                    <button className="btn btn-neutral mt-4 rounded-md">Loading ...</button>
+                    <button className="btn border-none btn-neutral mt-4 rounded-md">Loading ...</button>
                     :
 
                     (
                         userToEdit ?
-                            <button type="submit" className="btn grow bg-blue-500/80 mt-4 rounded-md">Save</button>
+                            <button type="submit" className="btn border-none grow bg-blue-500/80 mt-4 rounded-md">Save</button>
                             :
-                            <button type="submit" className="btn bg-blue-500/80 mt-4 rounded-md">Create account</button>
+                            <button type="submit" className="btn border-none bg-blue-500/80 mt-4 rounded-md">Create account</button>
                     )
             }
 

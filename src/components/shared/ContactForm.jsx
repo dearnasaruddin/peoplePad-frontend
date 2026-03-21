@@ -95,7 +95,7 @@ const ContactForm = ({ contactToEdit }) => {
 
     return (
 
-        <form onSubmit={(e) => handleSubmit(e)} className="fieldset bg-base-200 border-base-300 rounded-box w-full border p-4">
+        <form onSubmit={(e) => handleSubmit(e)} className="fieldset bg-gray-800 border-base-300 rounded-box w-full border p-4">
 
             <label className="label text-gray-300">Full Name</label>
             <input type="text" name="name" value={formData?.name} required onChange={(e) => handleChange(e)} className='input text-gray-300 border focus:border-none focus:outline-1 focus:outline-gray-400 w-full' placeholder="full name" />
@@ -111,7 +111,7 @@ const ContactForm = ({ contactToEdit }) => {
                     <button
                         type="button"
                         onClick={handleRemoveImage}
-                        className="btn btn-error text-xs lg:text-sm h-7 px-2 lg:px-6"
+                        className="btn border-none btn-error text-xs lg:text-sm h-7 px-2 lg:px-6"
                     >
                         {contactToEdit ? 'Remove' : 'Change'}
                     </button>
@@ -123,10 +123,10 @@ const ContactForm = ({ contactToEdit }) => {
 
             {
                 loading ?
-                    <button className="btn mt-4">Loading...</button>
+                    <button className="btn border-none mt-4">Loading...</button>
 
                     :
-                    <button type="submit" className="btn grow bg-blue-500/80 rounded-md mt-4">Save</button>
+                    <button type="submit" className="btn border-none grow bg-blue-500/80 rounded-md mt-4">Save</button>
             }
         </form>
 
