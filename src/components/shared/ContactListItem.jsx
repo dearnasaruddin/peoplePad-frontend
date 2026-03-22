@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { MdEdit, MdDelete } from "react-icons/md";
 import { getAvatarColor, getInitial } from "../../utils/createAvatar";
+import AlertBtn from './AlertBtn';
 
 const ContactListItem = ({ contact, handleDelete }) => {
     return (
@@ -29,8 +30,10 @@ const ContactListItem = ({ contact, handleDelete }) => {
                 <Link to={'/edit-contact'} state={contact} className="bg-blue-500 hover:bg-blue-600 text-white p-1 lg:p-2 rounded-md transition cursor-pointer">
                     <MdEdit className='text-xl' />
                 </Link>
-                <button onClick={() => handleDelete(contact?._id)} className="bg-[#d9534f] hover:bg-red-600 text-white p-1 lg:p-2 rounded-md transition cursor-pointer">
-                    <MdDelete className='text-xl' />
+                <button className="bg-[#d9534f] hover:bg-red-600 text-white p-1 lg:p-2 rounded-md transition cursor-pointer">
+                    <AlertBtn mainBtnOnClick={handleDelete} data={contact?._id}>
+                        <MdDelete className='text-xl' />
+                    </AlertBtn>
                 </button>
             </div>
 
