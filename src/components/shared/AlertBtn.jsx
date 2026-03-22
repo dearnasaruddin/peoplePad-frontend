@@ -10,7 +10,7 @@ import {
     AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 
-const AlertBtn = ({ children, alertHeading='Are you absolutely sure?', alertText='This action cannot be undone. This will permanently delete your account and remove your data from our servers.', mainBtn='Delete', mainBtnOnClick, data }) => {
+const AlertBtn = ({ children, alertHeading = 'Are you absolutely sure?', alertText = 'This action cannot be undone. This will permanently delete your account and remove your data from our servers.', mainBtn = 'Delete', mainBtnOnClick, data }) => {
     return (
         <AlertDialog>
             <AlertDialogTrigger asChild>
@@ -25,7 +25,11 @@ const AlertBtn = ({ children, alertHeading='Are you absolutely sure?', alertText
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                     <AlertDialogCancel className={'bg-gray-600  text-gray-200 border-none'}>Cancel</AlertDialogCancel>
-                    <AlertDialogAction onClick={()=>mainBtnOnClick(data)} className={'bg-red-700'}>{mainBtn}</AlertDialogAction>
+                    {data ?
+                        <AlertDialogAction onClick={() => mainBtnOnClick(data)} className={'bg-red-700'}>{mainBtn}</AlertDialogAction>
+                        :
+                        <AlertDialogAction onClick={mainBtnOnClick} className={'bg-red-700'}>{mainBtn}</AlertDialogAction>
+                    }
                 </AlertDialogFooter>
             </AlertDialogContent>
         </AlertDialog>

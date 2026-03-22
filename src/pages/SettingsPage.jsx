@@ -3,8 +3,38 @@ import SettingsListItem from "@/components/shared/SettingsListItem";
 import { FaAngleRight } from "react-icons/fa6";
 import { Switch } from "@/components/ui/switch"
 import AlertBtn from '@/components/shared/AlertBtn';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'sonner';
+import getValidAccessToken from '@/utils/getValidAccessToken';
+import { useDispatch } from 'react-redux';
+import { logout } from '@/features/auth/authSlice';
 
 const SettingsPage = () => {
+
+    const navigate = useNavigate()
+    const dispatch = useDispatch()
+    
+    const handleDeleteAccount = async () => {
+
+        const accessToken = await getValidAccessToken()
+        if (!accessToken) return
+
+        try {
+            const response = await axios.delete(`${import.meta.env.VITE_SERVER_URL}/delete-profile`, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                }
+            })
+            if (response.data?.error) return toast.error(response.data.error)
+            toast.success(response.data.message)
+            dispatch(logout())
+            navigate('/login')
+        } catch (error) {
+            toast.error("Something went wrong!")
+        }
+    }
+
     return (
         <CommonLayout heading='Settings'>
             <div className='divide-y divide-gray-700 overflow-auto p-2'>
@@ -44,7 +74,7 @@ const SettingsPage = () => {
                 </div>
 
 
-                <AlertBtn>
+                <AlertBtn mainBtnOnClick={handleDeleteAccount}>
                     <button type="button" className="btn w-full border-none bg-[#bb3b36] mt-4 py-5 rounded-lg">Delete Account</button>
                 </AlertBtn>
             </div>
