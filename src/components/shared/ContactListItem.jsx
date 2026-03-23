@@ -31,7 +31,7 @@ const ContactListItem = ({ contact, handleDelete }) => {
                     <MdEdit className='text-xl' />
                 </Link>
                 <button className="bg-[#d9534f] hover:bg-red-600 text-white p-1 lg:p-2 rounded-md transition cursor-pointer">
-                    <AlertBtn mainBtnOnClick={handleDelete} data={contact?._id}>
+                    <AlertBtn alertText='This action cannot be undone. Are you want to delete permanently this contact from our servers?' mainBtnOnClick={handleDelete} data={contact?._id}>
                         <MdDelete className='text-xl' />
                     </AlertBtn>
                 </button>

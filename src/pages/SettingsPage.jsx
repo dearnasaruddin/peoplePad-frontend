@@ -4,7 +4,7 @@ import { FaAngleRight } from "react-icons/fa6";
 import { Switch } from "@/components/ui/switch"
 import AlertBtn from '@/components/shared/AlertBtn';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { toast } from 'sonner';
 import getValidAccessToken from '@/utils/getValidAccessToken';
 import { useDispatch } from 'react-redux';
@@ -39,20 +39,20 @@ const SettingsPage = () => {
         <CommonLayout heading='Settings'>
             <div className='divide-y divide-gray-700 overflow-auto p-2'>
 
-                <div className='flex items-center justify-between cursor-pointer hover:bg-gray-900 pr-2'>
+                <Link to={'/change-password'} className='flex items-center justify-between cursor-pointer hover:bg-gray-900 pr-2'>
                     <SettingsListItem heading='Change password' />
                     <FaAngleRight className='text-gray-400' />
-                </div>
+                </Link>
 
-                <div className='flex items-center justify-between text-gray-200 cursor-pointer hover:bg-gray-900 pr-2'>
+                <div className='flex items-center justify-between text-gray-200 hover:bg-gray-900 pr-2'>
                     <SettingsListItem heading='Notifications' />
-                    <Switch className={'data-[state=unchecked]:bg-gray-500 data-[state=checked]:bg-green-500 data-[size=default]:h-6 data-[size=default]:w-11'} thumbClassName={'group-data-[size=default]/switch:size-5 data-[state=checked]:translate-x-[calc(105%)]'} />
+                    <Switch className={'data-[state=unchecked]:bg-gray-500 data-[state=checked]:bg-green-500 data-[size=default]:h-6 data-[size=default]:w-11 cursor-pointer'} thumbClassName={'group-data-[size=default]/switch:size-5 data-[state=checked]:translate-x-[calc(105%)]'} />
                 </div>
 
                 <div className='flex items-center justify-between text-gray-200 cursor-pointer hover:bg-gray-900 pr-2'>
                     <SettingsListItem heading='Account privacy' />
                     <div className='flex text-gray-400 items-center gap-1.5'>
-                        <span>Public</span>
+                        <span className='text-sm'>Public</span>
                         <FaAngleRight />
                     </div>
                 </div>
@@ -60,7 +60,7 @@ const SettingsPage = () => {
                 <div className='flex items-center justify-between text-gray-200 cursor-pointer hover:bg-gray-900 pr-2'>
                     <SettingsListItem heading='Language' />
                     <div className='flex text-gray-400 items-center gap-1.5'>
-                        <span>English</span>
+                        <span className='text-sm'>English</span>
                         <FaAngleRight />
                     </div>
                 </div>
@@ -68,7 +68,7 @@ const SettingsPage = () => {
                 <div className='flex items-center justify-between text-gray-200 cursor-pointer hover:bg-gray-900 pr-2'>
                     <SettingsListItem heading='Theme' />
                     <div className='flex text-gray-400 items-center gap-1.5'>
-                        <span>Dark</span>
+                        <span className='text-sm'>Dark</span>
                         <FaAngleRight />
                     </div>
                 </div>

@@ -95,7 +95,7 @@ const ContactForm = ({ contactToEdit }) => {
 
     return (
 
-        <form onSubmit={(e) => handleSubmit(e)} className="fieldset bg-gray-800 border-base-300 rounded-box w-full border p-4">
+        <form onSubmit={(e) => handleSubmit(e)} className="fieldset bg-gray-800 border-none rounded-box w-full border p-4">
 
             <label className="label text-gray-300">Full Name</label>
             <input type="text" name="name" value={formData?.name} required onChange={(e) => handleChange(e)} className='input text-gray-300 border focus:border-none focus:outline-1 focus:outline-gray-400 w-full' placeholder="full name" />

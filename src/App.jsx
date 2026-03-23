@@ -10,6 +10,7 @@ import { Toaster } from './components/ui/sonner'
 import EditContactPage from './pages/EditContactPage'
 import EditProfilePage from './pages/EditProfilePage'
 import SettingsPage from './pages/SettingsPage'
+import ChangePassPage from './pages/ChangePassPage'
 
 function App() {
 
@@ -27,6 +28,7 @@ function App() {
           <Route path={`/reset-password/:token`} element={<ResetPassPage />} />
           <Route path={'/forgot-password'} element={<ForgotPassPage />} />
           <Route path={'/settings'} element={<SettingsPage />} />
+          <Route path={'/change-password'} element={<ChangePassPage />} />
         </Routes>
       </BrowserRouter>
 

@@ -13,14 +13,15 @@ const ForgotPassPage = () => {
   })
 
   const handleSubmit = async () => {
-    dispatch(forgotPass(formData))
+    alert('this functionality currently unavailable for free server problem')
+    // dispatch(forgotPass(formData))
     setFormData({
       email: ''
     })
   }
 
   return (
-    <div className="flex flex-col justify-center items-center h-[80dvh]">
+    <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center h-[80dvh]">
       <fieldset className="fieldset bg-gray-800 border-base-300 rounded-box w-xs border p-4">
         <legend className="fieldset-legend">Forgot Password</legend>
 
@@ -31,10 +32,10 @@ const ForgotPassPage = () => {
           loading ?
             <button className="btn btn-neutral mt-4 rounded-md">Loading ...</button>
             :
-            <button onClick={handleSubmit} className="btn bg-blue-500/80 mt-4 rounded-md">Reset Password</button>
+            <button type="submit" className="btn bg-blue-500/80 mt-4 rounded-md">Reset Password</button>
         }
       </fieldset>
-    </div>
+    </form>
   )
 }
 

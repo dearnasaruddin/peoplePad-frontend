@@ -129,7 +129,7 @@ const UserForm = ({ userToEdit }) => {
 
 
     return (
-        <form onSubmit={handleSubmit} className={`fieldset bg-gray-800 border-base-300 rounded-box  ${userToEdit ? 'w-full' : 'w-xs'} border p-4`}>
+        <form onSubmit={handleSubmit} className={`fieldset bg-gray-800 border-none rounded-box  ${userToEdit ? 'w-full' : 'w-xs'} border p-4`}>
 
             {!userToEdit &&
                 <legend className="fieldset-legend">Registration</legend>
