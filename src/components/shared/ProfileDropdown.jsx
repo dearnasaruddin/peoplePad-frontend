@@ -62,9 +62,11 @@ const ProfileDropdown = ({ auth }) => {
                     </Link>
                 </DropdownMenuItem>
 
-                <DropdownMenuItem className="gap-2 cursor-pointer">
-                    <User />
-                    My Profile
+                <DropdownMenuItem className="p-0 gap-2 cursor-pointer">
+                    <Link to={'/my-profile'} className="flex gap-2 items-center py-1.5 px-2 w-full">
+                        <User />
+                        My Profile
+                    </Link>
                 </DropdownMenuItem>
 
                 <DropdownMenuItem className="p-0 gap-2 cursor-pointer">

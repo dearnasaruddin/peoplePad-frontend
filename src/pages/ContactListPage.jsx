@@ -14,9 +14,7 @@ import CommonLayout from '@/components/layout/CommonLayout';
 
 const ContactListPage = () => {
 
-  const navigate = useNavigate()
   const dispatch = useDispatch()
-  const auth = useSelector(state => state.auth)
   const [contacts, setContacts] = useState([])
   const [filteredContacts, setFilteredContacts] = useState([])
   const [searchTerm, setSearchTerm] = useState('');
@@ -28,12 +26,6 @@ const ContactListPage = () => {
     setFilteredContacts(result)
 
   }, [searchTerm, contacts])
-
-  useEffect(() => {
-    if (!auth.accessToken) {
-      navigate('/login')
-    }
-  }, [])
 
   useEffect(() => {
     const fetchInitialData = async () => {

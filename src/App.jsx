@@ -11,6 +11,7 @@ import EditContactPage from './pages/EditContactPage'
 import EditProfilePage from './pages/EditProfilePage'
 import SettingsPage from './pages/SettingsPage'
 import ChangePassPage from './pages/ChangePassPage'
+import MyProfilePage from './pages/MyProfilePage'
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<ContactListPage />} />
+          <Route path='/my-profile' element={<MyProfilePage />} />
           <Route path='/edit-profile' element={<EditProfilePage />} />
           <Route path='/create-contact' element={<CreateContactPage />} />
           <Route path='/edit-contact' element={<EditContactPage />} />
