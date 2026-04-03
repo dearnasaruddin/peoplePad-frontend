@@ -32,15 +32,15 @@ const ContactListPage = () => {
 
       const accessToken = await getValidAccessToken()
       if (!accessToken) return
-
       try {
-        const response = await axios.get(`${import.meta.env.VITE_SERVER_URL}/get-contacts`, {
+        const contactUrl = `${import.meta.env.VITE_SERVER_URL}/get-contacts`
+        const response = await axios.get(contactUrl, {
           headers: {
             'Authorization': `Bearer ${accessToken}`
           }
         })
         if (response.data?.error) return toast.error(response.data.error)
-        setContacts(response.data)
+        setContacts(response.data?.contacts)
 
         const userResponse = await axios.get(`${import.meta.env.VITE_SERVER_URL}/user/me`, {
           headers: { 'Authorization': `Bearer ${accessToken}` }
