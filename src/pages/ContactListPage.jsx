@@ -10,22 +10,34 @@ import { toast } from 'sonner';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateUserProfile } from '@/features/auth/authSlice';
 import CommonLayout from '@/components/layout/CommonLayout';
+import Pagination from '@/components/shared/Pagination';
 
 
 const ContactListPage = () => {
 
   const dispatch = useDispatch()
-  const [contacts, setContacts] = useState([])
+  const [contactsData, setContactsData] = useState({
+    totalPages: 0,
+    contacts: []
+  })
   const [filteredContacts, setFilteredContacts] = useState([])
+  const [query, setQuery] = useState({
+    page: 1,
+    limit: 10
+  })
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
-    const result = contacts?.filter((contact) =>
+    const result = contactsData.contacts?.filter((contact) =>
       contact.name.toLowerCase().includes(searchTerm.toLowerCase())
     )
     setFilteredContacts(result)
 
-  }, [searchTerm, contacts])
+  }, [searchTerm, contactsData])
+
+  const onPageChange = (pageNumber) => {
+    setQuery({ ...query, page: pageNumber })
+  }
 
   useEffect(() => {
     const fetchInitialData = async () => {
@@ -33,20 +45,24 @@ const ContactListPage = () => {
       const accessToken = await getValidAccessToken()
       if (!accessToken) return
       try {
-        const contactUrl = `${import.meta.env.VITE_SERVER_URL}/get-contacts`
+        const contactUrl = `${import.meta.env.VITE_SERVER_URL}/get-contacts?page=${query.page}&limit=${query.limit}`
+
         const response = await axios.get(contactUrl, {
           headers: {
             'Authorization': `Bearer ${accessToken}`
           }
         })
         if (response.data?.error) return toast.error(response.data.error)
-        setContacts(response.data?.contacts)
+        setContactsData({
+          totalPages: response.data?.totalPage,
+          contacts: response.data?.contacts
+        })
 
         const userResponse = await axios.get(`${import.meta.env.VITE_SERVER_URL}/user/me`, {
           headers: { 'Authorization': `Bearer ${accessToken}` }
         })
 
-        if (userResponse.data?.error) return toast.error(response.data.error)
+        if (userResponse.data?.error) return toast.error(userResponse.data.error)
 
         dispatch(updateUserProfile({
           username: userResponse.data.username,
@@ -54,15 +70,13 @@ const ContactListPage = () => {
           avatarUrl: userResponse.data.avatarUrl || null
         }))
 
-
       } catch (error) {
         console.log("Error fetching initial data", error)
       }
     }
 
     fetchInitialData()
-  }, [])
-
+  }, [query])
 
   const handleDelete = async (id) => {
 
@@ -76,9 +90,12 @@ const ContactListPage = () => {
 
     if (response.data?.error) return toast.error(response.data.error)
     toast.success(response.data.message)
-    setContacts((prevContacts) => prevContacts.filter(contact => contact._id !== id))
+    setContactsData((prev) => ({
+      ...prev,
+      contacts: prev.contacts.filter(contact => contact._id !== id)
+    }))
   }
-  // lg:h-[calc(100% - 72px)]
+
 
   return (
     <CommonLayout>
@@ -92,9 +109,18 @@ const ContactListPage = () => {
           {filteredContacts.length <= 0 ?
             <EmptyState text='No Contact Found' />
             :
-            filteredContacts.map((contact) => (
-              <ContactListItem key={contact._id} contact={contact} handleDelete={handleDelete} />
-            ))}
+            <>
+              {filteredContacts.map((contact) => (
+                <ContactListItem key={contact._id} contact={contact} handleDelete={handleDelete} />
+              ))}
+
+              {
+                contactsData.totalPages > 1 &&
+                <Pagination currentPage={query.page} totalPages={contactsData.totalPages} onPageChange={onPageChange} />
+              }
+            </>
+          }
+
         </div>
 
         {/* Footer */}
