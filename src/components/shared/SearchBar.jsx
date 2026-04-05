@@ -2,7 +2,7 @@ import { IoSearch } from 'react-icons/io5'
 
 const SearchBar = ({searchTerm, setSearchTerm}) => {
     return (
-        <div className="p-2.5 lg:p-4 bg-gray-800 border-b border-gray-700">
+        <div className="bg-gray-800 border-b border-gray-700 grow">
             <div className="relative text-gray-800">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                     <IoSearch className='text-xl' />

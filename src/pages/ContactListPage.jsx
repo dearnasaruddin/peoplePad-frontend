@@ -11,6 +11,10 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateUserProfile } from '@/features/auth/authSlice';
 import CommonLayout from '@/components/layout/CommonLayout';
 import Pagination from '@/components/shared/Pagination';
+import {
+  NativeSelect,
+  NativeSelectOption,
+} from "@/components/ui/native-select"
 
 
 const ContactListPage = () => {
@@ -102,7 +106,17 @@ const ContactListPage = () => {
       <div className='flex flex-col h-full'>
 
         {/* Search Bar */}
-        <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+        <div className='flex gap-2 justify-between items-center p-2.5 lg:p-4'>
+          <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+          <div>
+            <NativeSelect value={query.limit} onChange={(e)=>setQuery((prev) => ({...prev, limit: e.target.value}))} className='text-gray-300 border-gray-500'>
+              <NativeSelectOption value={5}>05 Show</NativeSelectOption>
+              <NativeSelectOption value={10}>10 Show</NativeSelectOption>
+              <NativeSelectOption value={15}>15 Show</NativeSelectOption>
+              <NativeSelectOption value={20}>20 Show</NativeSelectOption>
+            </NativeSelect>
+          </div>
+        </div>
 
         {/* List Items */}
         <div className="divide-y divide-gray-700 overflow-auto">
