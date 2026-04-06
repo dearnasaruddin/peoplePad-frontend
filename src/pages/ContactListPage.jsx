@@ -3,11 +3,10 @@ import ContactListItem from '../components/shared/ContactListItem';
 import SearchBar from '../components/shared/SearchBar';
 import Footer from '../components/layout/Footer';
 import EmptyState from '../components/shared/EmptyState';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import getValidAccessToken from '@/utils/getValidAccessToken';
 import { toast } from 'sonner';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { updateUserProfile } from '@/features/auth/authSlice';
 import CommonLayout from '@/components/layout/CommonLayout';
 import Pagination from '@/components/shared/Pagination';
@@ -22,6 +21,7 @@ const ContactListPage = () => {
   const dispatch = useDispatch()
   const [contactsData, setContactsData] = useState({
     totalPages: 0,
+    totalItems: 0,
     contacts: []
   })
   const [filteredContacts, setFilteredContacts] = useState([])
@@ -59,7 +59,8 @@ const ContactListPage = () => {
         if (response.data?.error) return toast.error(response.data.error)
         setContactsData({
           totalPages: response.data?.totalPage,
-          contacts: response.data?.contacts
+          contacts: response.data?.contacts,
+          totalItems: response.data?.totalItems
         })
 
         const userResponse = await axios.get(`${import.meta.env.VITE_SERVER_URL}/user/me`, {
@@ -106,17 +107,19 @@ const ContactListPage = () => {
       <div className='flex flex-col h-full'>
 
         {/* Search Bar */}
-        <div className='flex gap-2 justify-between items-center p-2.5 lg:p-4'>
-          <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-          <div>
-            <NativeSelect value={query.limit} onChange={(e)=>setQuery((prev) => ({...prev, limit: e.target.value}))} className='text-gray-300 border-gray-500'>
-              <NativeSelectOption value={5}>05 Show</NativeSelectOption>
-              <NativeSelectOption value={10}>10 Show</NativeSelectOption>
-              <NativeSelectOption value={15}>15 Show</NativeSelectOption>
-              <NativeSelectOption value={20}>20 Show</NativeSelectOption>
-            </NativeSelect>
+        {filteredContacts.length > 0 &&
+          <div className='flex gap-2 justify-between items-center p-2.5 lg:p-4'>
+            <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
+            <div>
+              <NativeSelect value={query.limit} onChange={(e) => setQuery((prev) => ({ ...prev, limit: e.target.value }))} className='text-gray-300 border-gray-500'>
+                <NativeSelectOption value={5}>05 Show</NativeSelectOption>
+                <NativeSelectOption value={10}>10 Show</NativeSelectOption>
+                <NativeSelectOption value={15}>15 Show</NativeSelectOption>
+                <NativeSelectOption value={20}>20 Show</NativeSelectOption>
+              </NativeSelect>
+            </div>
           </div>
-        </div>
+        }
 
         {/* List Items */}
         <div className="divide-y divide-gray-700 overflow-auto">
@@ -138,7 +141,9 @@ const ContactListPage = () => {
         </div>
 
         {/* Footer */}
-        <Footer itemCount={filteredContacts.length} />
+        {filteredContacts.length > 0 &&
+          <Footer itemCount={contactsData.totalItems} />
+        }
       </div>
 
     </CommonLayout>

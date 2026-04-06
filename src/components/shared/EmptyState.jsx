@@ -2,7 +2,7 @@ import {Link} from 'react-router-dom'
 
 const EmptyState = ({ text }) => {
   return (
-    <div className='h-[32dvh] text-center flex justify-center items-center'>
+    <div className='h-[45dvh] text-center flex justify-center items-center'>
       <div>
         <p className='text-gray-300 mb-3'>{text}</p>
         <Link to={'/create-contact'} className='btn btn-primary'>Create Contact</Link>
