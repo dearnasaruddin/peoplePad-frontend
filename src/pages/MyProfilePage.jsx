@@ -38,7 +38,7 @@ const MyProfilePage = () => {
                                     </div>
                                 }
 
-                                <div className='space-y-1 mt-2'>
+                                <div className='mt-1'>
                                     <label className="label text-gray-300 text-sm ml-1">Username</label>
                                     <input type="text" disabled name="username" value={userData.username} className='input w-full text-gray-300 bg-[#1d232a] border border-gray-700 rounded-md focus:border-none focus:outline-1 focus:outline-gray-400' placeholder="username" />
 

@@ -5,7 +5,7 @@ import {
 
 const ItemsPerPageSelect = ({limit, onChange}) => {
     return (
-        <div>
+        <div className="min-w-26">
             <NativeSelect value={limit} onChange={onChange} className='text-gray-300 border-gray-500'>
                 <NativeSelectOption value={5}>05 Show</NativeSelectOption>
                 <NativeSelectOption value={10}>10 Show</NativeSelectOption>
