@@ -24,7 +24,7 @@ const ContactListPage = () => {
   const [filteredContacts, setFilteredContacts] = useState([])
   const [query, setQuery] = useState({
     page: 1,
-    limit: JSON.parse(localStorage.getItem('peoplePadSettings')).showItems ?? 10
+    limit: JSON.parse(localStorage.getItem('peoplePadSettings'))?.showItems ?? 10
   })
   const [searchTerm, setSearchTerm] = useState('');
 
