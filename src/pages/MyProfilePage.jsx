@@ -40,15 +40,15 @@ const MyProfilePage = () => {
 
                                 <div className='space-y-1 mt-2'>
                                     <label className="label text-gray-300 text-sm ml-1">Username</label>
-                                    <input type="text" disabled name="username" value={userData.username} className='input w-full text-gray-300 border focus:border-none focus:outline-1 focus:outline-gray-400' placeholder="username" />
+                                    <input type="text" disabled name="username" value={userData.username} className='input w-full text-gray-300 bg-[#1d232a] border border-gray-700 rounded-md focus:border-none focus:outline-1 focus:outline-gray-400' placeholder="username" />
 
                                     <label className="label text-gray-300 text-sm ml-1">Email</label>
-                                    <input type="email" disabled name="email" value={userData.email} className='input w-full text-gray-300 border focus:border-none focus:outline-1 focus:outline-gray-400' placeholder="email" />
+                                    <input type="email" disabled name="email" value={userData.email} className='input w-full text-gray-300 bg-[#1d232a] border border-gray-700 rounded-md focus:border-none focus:outline-1 focus:outline-gray-400' placeholder="email" />
 
                                     <label className="label text-gray-300 text-sm ml-1">Phone</label>
-                                    <input type="text" disabled name="email" value={userData.phone ? userData.phone : 'N/A'} className='input w-full text-gray-300 border focus:border-none focus:outline-1 focus:outline-gray-400' placeholder="Phone" />
+                                    <input type="text" disabled name="email" value={userData.phone ? userData.phone : 'N/A'} className='input w-full text-gray-300 bg-[#1d232a] border border-gray-700 rounded-md focus:border-none focus:outline-1 focus:outline-gray-400' placeholder="Phone" />
 
-                                    <Link to={'/edit-profile'} className="btn border-none w-full bg-blue-500/80 rounded-md mt-4">Edit Profile</Link>
+                                    <Link to={'/edit-profile'} className="btn border-none shadow w-full bg-blue-500/80 rounded-md mt-4">Edit Profile</Link>
                                 </div>
                             </>
                         )

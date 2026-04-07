@@ -132,14 +132,14 @@ const UserForm = ({ userToEdit }) => {
         <form onSubmit={handleSubmit} className={`fieldset bg-gray-800 border-none rounded-box  ${userToEdit ? 'w-full' : 'w-xs'} border p-4`}>
 
             {!userToEdit &&
-                <legend className="fieldset-legend">Registration</legend>
+                <legend className="fieldset-legend text-gray-200">Registration</legend>
             }
 
             <label className="label text-gray-300">Username</label>
-            <input type="text" required name="username" onChange={handleChange} value={formData.username} className={`input ${userToEdit ? 'w-full' : ''} text-gray-300 border focus:border-none focus:outline-1 focus:outline-gray-400`} placeholder="username" />
+            <input type="text" required name="username" onChange={handleChange} value={formData.username} className={`input ${userToEdit ? 'w-full' : ''} text-gray-300 bg-[#1d232a] border focus:border-none focus:outline-1 focus:outline-gray-400`} placeholder="username" />
 
             <label className="label text-gray-300">Email</label>
-            <input type="email" required name="email" onChange={handleChange} value={formData.email} className={`input  ${userToEdit ? 'w-full' : ''} text-gray-300 border focus:border-none focus:outline-1 focus:outline-gray-400`} placeholder="email" />
+            <input type="email" required name="email" onChange={handleChange} value={formData.email} className={`input  ${userToEdit ? 'w-full' : ''} text-gray-300 bg-[#1d232a] border focus:border-none focus:outline-1 focus:outline-gray-400`} placeholder="email" />
 
             {userToEdit ?
                 <>
@@ -158,14 +158,14 @@ const UserForm = ({ userToEdit }) => {
                             </div>
                         ) : (
 
-                            <input type="file" name="avatar" accept="image/*" onChange={handleFileChange} className="file-input w-full file-input-neutral text-gray-400 border border-gray-700 focus:border-none focus:outline-1 focus:outline-gray-400" />
+                            <input type="file" name="avatar" accept="image/*" onChange={handleFileChange} className="file-input w-full file-input-neutral text-gray-400 bg-[#1d232a] border border-gray-700 focus:border-none focus:outline-1 focus:outline-gray-400" />
                         )}
                 </>
                 :
                 <>
                     <label className="label text-gray-300">Password</label>
                     <div className="relative">
-                        <input type={showPassword ? 'text' : 'password'} required name="password" onChange={handleChange} value={formData.password} className={`input  ${userToEdit ? 'w-full' : ''} text-gray-300 border focus:border-none focus:outline-1 focus:outline-gray-400`} placeholder="password" />
+                        <input type={showPassword ? 'text' : 'password'} required name="password" onChange={handleChange} value={formData.password} className={`input  ${userToEdit ? 'w-full' : ''} text-gray-300 bg-[#1d232a] border focus:border-none focus:outline-1 focus:outline-gray-400`} placeholder="password" />
                         {formData.password &&
                             (showPassword ?
                                 <span onClick={() => setShowPassword(false)} className="absolute top-1/2 -translate-y-1/2 text-lg text-gray-300 right-3 cursor-pointer"><GoEye /></span>
@@ -183,9 +183,9 @@ const UserForm = ({ userToEdit }) => {
 
                     (
                         userToEdit ?
-                            <button type="submit" className="btn border-none grow bg-blue-500/80 mt-4 rounded-md">Save</button>
+                            <button type="submit" className="btn border-none grow shadow bg-blue-500/80 mt-4 rounded-md">Save</button>
                             :
-                            <button type="submit" className="btn border-none bg-blue-500/80 mt-4 rounded-md">Create account</button>
+                            <button type="submit" className="btn border-none shadow bg-blue-500/80 mt-4 rounded-md">Create account</button>
                     )
             }
 

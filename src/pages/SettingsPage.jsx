@@ -87,7 +87,7 @@ const SettingsPage = () => {
 
 
                 <AlertBtn mainBtnOnClick={handleDeleteAccount}>
-                    <button type="button" className="btn w-full border-none bg-[#bb3b36] mt-4 py-5 rounded-lg">Delete Account</button>
+                    <button type="button" className="btn w-full border-none shadow bg-[#bb3b36] mt-4 py-5 rounded-lg">Delete Account</button>
                 </AlertBtn>
             </div>
         </CommonLayout>

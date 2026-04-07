@@ -123,3 +123,8 @@
     @apply bg-background text-foreground;
     }
 }
+
+body{
+    background: #1d232a !important;
+    height: 100vh;
+}
