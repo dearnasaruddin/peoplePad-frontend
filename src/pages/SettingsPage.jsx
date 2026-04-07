@@ -9,11 +9,23 @@ import { toast } from 'sonner';
 import getValidAccessToken from '@/utils/getValidAccessToken';
 import { useDispatch } from 'react-redux';
 import { logout } from '@/features/auth/authSlice';
+import { useState } from 'react';
 
 const SettingsPage = () => {
 
     const navigate = useNavigate()
     const dispatch = useDispatch()
+    const currentSettings = JSON.parse(localStorage.getItem('peoplePadSettings'))
+    const [notification, setNotification] = useState(currentSettings.notification ?? false)
+
+    const handleNotification = (isChecked)=>{
+        setNotification(isChecked)
+        let newSettings = {
+            ...currentSettings,
+            notification: isChecked
+        }
+        localStorage.setItem('peoplePadSettings', JSON.stringify(newSettings))
+    }
     
     const handleDeleteAccount = async () => {
 
@@ -46,7 +58,7 @@ const SettingsPage = () => {
 
                 <div className='flex items-center justify-between text-gray-200 hover:bg-gray-900 pr-2'>
                     <SettingsListItem heading='Notifications' />
-                    <Switch className={'data-[state=unchecked]:bg-gray-500 data-[state=checked]:bg-green-500 data-[size=default]:h-6 data-[size=default]:w-11 cursor-pointer'} thumbClassName={'group-data-[size=default]/switch:size-5 data-[state=checked]:translate-x-[calc(105%)]'} />
+                    <Switch onCheckedChange={handleNotification} checked={notification} className={'data-[state=unchecked]:bg-gray-500 data-[state=checked]:bg-green-500 data-[size=default]:h-6 data-[size=default]:w-11 cursor-pointer'} thumbClassName={'group-data-[size=default]/switch:size-5 data-[state=checked]:translate-x-[calc(105%)]'} />
                 </div>
 
                 <div className='flex items-center justify-between text-gray-200 cursor-pointer hover:bg-gray-900 pr-2'>

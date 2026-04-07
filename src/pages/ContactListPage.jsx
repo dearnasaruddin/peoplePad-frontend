@@ -10,10 +10,7 @@ import { useDispatch } from 'react-redux';
 import { updateUserProfile } from '@/features/auth/authSlice';
 import CommonLayout from '@/components/layout/CommonLayout';
 import Pagination from '@/components/shared/Pagination';
-import {
-  NativeSelect,
-  NativeSelectOption,
-} from "@/components/ui/native-select"
+import ItemsPerPageSelect from '@/components/shared/ItemsPerPageSelect';
 
 
 const ContactListPage = () => {
@@ -27,7 +24,7 @@ const ContactListPage = () => {
   const [filteredContacts, setFilteredContacts] = useState([])
   const [query, setQuery] = useState({
     page: 1,
-    limit: 10
+    limit: JSON.parse(localStorage.getItem('peoplePadSettings')).showItems ?? 10
   })
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -83,6 +80,17 @@ const ContactListPage = () => {
     fetchInitialData()
   }, [query])
 
+  const handleItemsToShow = (e) => {
+    const newLimit = e.target.value
+    setQuery((prev) => ({ ...prev, limit: newLimit }))
+    const peoplePadSettings = JSON.parse(localStorage.getItem('peoplePadSettings'))
+    let newSettings = {
+      ...peoplePadSettings,
+      showItems: newLimit
+    }
+    localStorage.setItem('peoplePadSettings', JSON.stringify(newSettings))
+  }
+
   const handleDelete = async (id) => {
 
     const accessToken = await getValidAccessToken()
@@ -107,19 +115,10 @@ const ContactListPage = () => {
       <div className='flex flex-col h-full'>
 
         {/* Search Bar */}
-        {filteredContacts.length > 0 &&
           <div className='flex gap-2 justify-between items-center p-2.5 lg:p-4'>
             <SearchBar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-            <div>
-              <NativeSelect value={query.limit} onChange={(e) => setQuery((prev) => ({ ...prev, limit: e.target.value }))} className='text-gray-300 border-gray-500'>
-                <NativeSelectOption value={5}>05 Show</NativeSelectOption>
-                <NativeSelectOption value={10}>10 Show</NativeSelectOption>
-                <NativeSelectOption value={15}>15 Show</NativeSelectOption>
-                <NativeSelectOption value={20}>20 Show</NativeSelectOption>
-              </NativeSelect>
-            </div>
+            <ItemsPerPageSelect limit={query.limit} onChange={handleItemsToShow}/>
           </div>
-        }
 
         {/* List Items */}
         <div className="divide-y divide-gray-700 overflow-auto">

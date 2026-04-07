@@ -4,6 +4,7 @@ import { GoEye, GoEyeClosed } from "react-icons/go";
 import { login } from "../features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "sonner";
+import Notice from "@/components/shared/Notice";
 
 
 const LoginPage = () => {
@@ -17,6 +18,15 @@ const LoginPage = () => {
     password: '',
   })
   const [showPassword, setShowPassword] = useState(false);
+  const currentNotice = JSON.parse(localStorage.getItem('peoplePadSettings'))?.notice ?? true
+  const [freeServerNotification, setFreeServerNotification] = useState(currentNotice)
+
+  const handleNotice = () => {
+    setFreeServerNotification(false)
+    localStorage.setItem('peoplePadSettings', JSON.stringify({
+      notice: false
+    }))
+  }
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -49,6 +59,9 @@ const LoginPage = () => {
 
   return (
     <div className="flex flex-col justify-center items-center h-[80vh]">
+
+      {freeServerNotification && <Notice handleNotice={handleNotice} />}
+
       <form onSubmit={handleSubmit} className="fieldset bg-gray-800 border-base-300 rounded-box w-xs border p-4">
         <legend className="fieldset-legend">Login</legend>
 
